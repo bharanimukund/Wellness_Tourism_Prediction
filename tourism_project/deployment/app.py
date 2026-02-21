@@ -21,6 +21,14 @@ def load_model():
 
 model = load_model()
 
+training_columns = [
+    'Age', 'TypeofContact', 'CityTier', 'DurationOfPitch',
+    'Occupation', 'Gender', 'NumberOfPersonVisiting', 'NumberOfFollowups',
+    'ProductPitched', 'PreferredPropertyStar', 'MaritalStatus', 'NumberOfTrips',
+    'Passport', 'PitchSatisfactionScore', 'OwnCar', 'NumberOfChildrenVisiting', 
+    'Designation', 'MonthlyIncome'
+]
+
 st.title("Wellness Tourism Purchase Prediction")
 st.write("Predict whether a customer is likely to purchase a wellness tourism package.")
 
@@ -82,13 +90,19 @@ with st.form("single_prediction_form"):
             "MonthlyIncome": income
         }])
 
-        prediction = model.predict(input_df)[0]
-        probability = model.predict_proba(input_df)[0][1]
+        # Reorder input_df columns to match training
+        input_df_ordered = input_df[training_columns]
 
-        preview_dict = input_df.head().to_dict(orient="records")
-        logging.info("input_df preview (first rows): %s", preview_dict)
-        logging.info("prediction: %s", prediction)
+        # Make prediction
+        prediction = model.predict(input_df_ordered)[0]
 
+        # Get probability of positive class (1)
+        probability = model.predict_proba(input_df_ordered)[0][1]
+
+        # Optional: log the ordered input_df
+        logging.info("Input data (ordered): %s", input_df_ordered.head().to_dict(orient="records"))
+        logging.info("Prediction: %s, Probability: %.4f", prediction, probability)
+        
         if prediction == 1:
             st.success(f"✅ Customer is likely to purchase (Probability: {probability:.2f})")
         else:
