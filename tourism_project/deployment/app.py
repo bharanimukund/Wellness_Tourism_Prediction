@@ -5,6 +5,12 @@ import numpy as np
 import joblib
 import io
 from huggingface_hub import hf_hub_download
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,   # 👈 enables INFO logs
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
 
 # Download and load the model
 @st.cache_resource
@@ -78,6 +84,10 @@ with st.form("single_prediction_form"):
 
         prediction = model.predict(input_df)[0]
         probability = model.predict_proba(input_df)[0][1]
+
+        preview_dict = input_df.head().to_dict(orient="records")
+        logging.info("input_df preview (first rows): %s", preview_dict)
+        logging.info("prediction: %s", prediction)
 
         if prediction == 1:
             st.success(f"✅ Customer is likely to purchase (Probability: {probability:.2f})")
