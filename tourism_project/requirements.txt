@@ -4,5 +4,5 @@ numpy
 scikit-learn
 joblib
 streamlit
-mlflow=3.0.1
+mlflow==3.0.1
 huggingface_hub
