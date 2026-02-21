@@ -9,7 +9,7 @@ from huggingface_hub import hf_hub_download
 # Download and load the model
 @st.cache_resource
 def load_model():
-    model_path = hf_hub_download(repo_id="bkrishnamukund/Wellness-Tourism-Prediction", 
+    model_path = hf_hub_download(repo_id="bkrishnamukund/Wellness-Tourism-Prediction",
                              filename="best_wellness_tourism_prediction_model_v1.joblib")
     return joblib.load(model_path)
 

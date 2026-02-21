@@ -70,7 +70,7 @@ preprocessor = make_column_transformer(
 )
 
 # Define base XGBoost model
-xgb_model = xgb.XGBClassifier(scale_pos_weight=scale_pos_weight, 
+xgb_model = xgb.XGBClassifier(scale_pos_weight=scale_pos_weight,
                               random_state=42)
 
 # Define hyperparameter grid
@@ -188,7 +188,7 @@ with mlflow.start_run(run_name="RandomizedSearchCV_Recall"):
         "test_recall": test_report['1']['recall'],
         "test_f1-score": test_report['1']['f1-score']
     })
-    
+
     # Save the model locally
     model_path = "best_wellness_tourism_prediction_model_v1.joblib"
     joblib.dump(best_model, model_path)
