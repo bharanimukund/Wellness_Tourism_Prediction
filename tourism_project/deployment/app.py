@@ -16,7 +16,7 @@ logging.basicConfig(
 @st.cache_resource
 def load_model():
     model_path = hf_hub_download(repo_id="bkrishnamukund/Wellness-Tourism-Prediction",
-                             filename="best_wellness_tourism_prediction_model_v1.joblib")
+                             filename="best_wellness_tourism_prediction_model_v2.joblib")
     return joblib.load(model_path)
 
 model = load_model()
@@ -41,7 +41,7 @@ with st.form("single_prediction_form"):
         age = st.number_input("Age", min_value=18, max_value=100)
         typeofcontact = st.selectbox("Type of Contact", ["Company Invited", "Self Enquiry"])
         citytier = st.selectbox("City Tier", [1, 2, 3])
-        occupation = st.selectbox("Occupation", ["Salaried", "Freelancer", "Small Business", "Large Business"])
+        occupation = st.selectbox("Occupation", ["Salaried", "Free Lancer", "Small Business", "Large Business"])
         gender = st.selectbox("Gender", ["Male", "Female"])
         maritalstatus = st.selectbox("Marital Status", ["Single", "Married", "Divorced"])
 

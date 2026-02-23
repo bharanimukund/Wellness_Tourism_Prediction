@@ -190,7 +190,7 @@ with mlflow.start_run(run_name="RandomizedSearchCV_Recall"):
     })
 
     # Save the model locally
-    model_path = "best_wellness_tourism_prediction_model_v1.joblib"
+    model_path = "best_wellness_tourism_prediction_model_v2.joblib"
     joblib.dump(best_model, model_path)
 
     # Log the model artifact
@@ -212,8 +212,8 @@ with mlflow.start_run(run_name="RandomizedSearchCV_Recall"):
 
     # create_repo("churn-model", repo_type="model", private=False)
     api.upload_file(
-        path_or_fileobj="best_wellness_tourism_prediction_model_v1.joblib",
-        path_in_repo="best_wellness_tourism_prediction_model_v1.joblib",
+        path_or_fileobj="best_wellness_tourism_prediction_model_v2.joblib",
+        path_in_repo="best_wellness_tourism_prediction_model_v2.joblib",
         repo_id=repo_id,
         repo_type=repo_type
     )
