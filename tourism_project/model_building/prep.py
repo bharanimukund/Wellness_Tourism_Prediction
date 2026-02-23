@@ -22,6 +22,25 @@ df.drop(columns=["Unnamed: 0", "CustomerID"], inplace=True)
 # -------------------- Target Column --------------------
 target_col = "ProdTaken"
 
+
+# Standardize Gender column
+df['Gender'] = (
+    df['Gender']
+    .str.strip()              # remove leading/trailing spaces
+    .str.replace('Fe Male', 'Female', regex=False)
+)
+
+df['Gender'].value_counts(normalize=True) * 100
+
+# Clean MaritalStatus column
+df['MaritalStatus'] = (
+    df['MaritalStatus']
+    .str.strip()
+    .str.replace('Unmarried', 'Single', regex=False)
+)
+
+df['MaritalStatus'].value_counts(normalize=True) * 100
+
 # Split into X (features) and y (target)
 X = df.drop(columns=[target_col])
 y = df[target_col]
