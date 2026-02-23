@@ -25,7 +25,7 @@ training_columns = [
     'Age', 'TypeofContact', 'CityTier', 'DurationOfPitch',
     'Occupation', 'Gender', 'NumberOfPersonVisiting', 'NumberOfFollowups',
     'ProductPitched', 'PreferredPropertyStar', 'MaritalStatus', 'NumberOfTrips',
-    'Passport', 'PitchSatisfactionScore', 'OwnCar', 'NumberOfChildrenVisiting', 
+    'Passport', 'PitchSatisfactionScore', 'OwnCar', 'NumberOfChildrenVisiting',
     'Designation', 'MonthlyIncome'
 ]
 
@@ -39,11 +39,11 @@ with st.form("single_prediction_form"):
 
     with col1:
         age = st.number_input("Age", min_value=18, max_value=100)
-        typeofcontact = st.selectbox("Type of Contact", ["Company Invited", "Self Inquiry"])
+        typeofcontact = st.selectbox("Type of Contact", ["Company Invited", "Self Enquiry"])
         citytier = st.selectbox("City Tier", [1, 2, 3])
         occupation = st.selectbox("Occupation", ["Salaried", "Freelancer", "Small Business", "Large Business"])
         gender = st.selectbox("Gender", ["Male", "Female"])
-        maritalstatus = st.selectbox("Marital Status", ["Single", "Unmarried", "Married", "Divorced"])
+        maritalstatus = st.selectbox("Marital Status", ["Single", "Married", "Divorced"])
 
     with col2:
         num_persons = st.number_input("Number of Persons Visiting", min_value=1)
@@ -56,7 +56,7 @@ with st.form("single_prediction_form"):
     pitch_score = st.slider("Pitch Satisfaction Score", 1, 5)
     product_pitched = st.selectbox(
         "Product Pitched",
-        ["Basic", "Standard", "Deluxe", "Super Deluxe"]
+        ["Basic", "Standard", "Deluxe", "Super Deluxe", "King"]
     )
     followups = st.number_input("Number of Followups", min_value=0)
     pitch_duration = st.number_input("Duration of Pitch (minutes)", min_value=1)
@@ -66,7 +66,7 @@ with st.form("single_prediction_form"):
     )
     income = st.number_input("Monthly Income", min_value=0.0, step=1000.0)
 
-    submit = st.form_submit_button("Predict")
+    submit = st.form_submit_button("Predict Tourism Package Purchase")
 
     if submit:
         input_df = pd.DataFrame([{
@@ -102,13 +102,13 @@ with st.form("single_prediction_form"):
         # Optional: log the ordered input_df
         logging.info("Input data (ordered): %s", input_df_ordered.head().to_dict(orient="records"))
         logging.info("Prediction: %s, Probability: %.4f", prediction, probability)
-        
+
         if prediction == 1:
             st.success(f"✅ Customer is likely to purchase (Probability: {probability:.2f})")
         else:
             st.warning(f"❌ Customer is unlikely to purchase (Probability: {probability:.2f})")
 
-st.header("Batch Prediction (CSV Upload)")
+st.header("Batch Predict Tourism Package Purchase (CSV Upload)")
 
 uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
